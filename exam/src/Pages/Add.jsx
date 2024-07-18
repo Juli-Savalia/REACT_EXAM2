@@ -38,11 +38,16 @@ const Add = () => {
   };
 
   return (
-    <div className="py-5">
-      <form className="col-9 mx-auto py-5" onSubmit={handleSubmit}>
+    <div className="py-2">
+      <h3 className="text-center">ADD RECORDS</h3>
+      <form className="col-9 mx-auto p-5 bg-secondary" onSubmit={handleSubmit}>
         {/* name */}
         <div className="mb-3">
-          <label htmlFor="name" className="form-label">
+          <label
+            style={{ color: "white" }}
+            htmlFor="name"
+            className="form-label"
+          >
             Name :
           </label>
           <input
@@ -54,7 +59,11 @@ const Add = () => {
         </div>
         {/* email */}
         <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">
+          <label
+            style={{ color: "white" }}
+            htmlFor="exampleInputEmail1"
+            className="form-label"
+          >
             Email address
           </label>
           <input
@@ -71,7 +80,11 @@ const Add = () => {
         </div>
         {/* password */}
         <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
+          <label
+            style={{ color: "white" }}
+            htmlFor="exampleInputPassword1"
+            className="form-label"
+          >
             Password
           </label>
           <input
@@ -84,7 +97,11 @@ const Add = () => {
         </div>
         {/* city */}
         <div className="mb-3">
-          <label htmlFor="city" className="d-block py-2 ">
+          <label
+            style={{ color: "white" }}
+            htmlFor="city"
+            className="d-block py-2 "
+          >
             Select Your City
           </label>
           <select
@@ -103,7 +120,11 @@ const Add = () => {
         </div>
         {/* salary  */}
         <div className="mb-3">
-          <label htmlFor="salary" className="d-block py-2">
+          <label
+            style={{ color: "white" }}
+            htmlFor="salary"
+            className="d-block py-2"
+          >
             Enter Your Salary
           </label>
           <input
@@ -116,7 +137,11 @@ const Add = () => {
         </div>
         {/* designation */}
         <div className="mb-3">
-          <label htmlFor="designtion" className="d-block py-2">
+          <label
+            style={{ color: "white" }}
+            htmlFor="designtion"
+            className="d-block py-2"
+          >
             Enter Your Designation
           </label>
           <input
@@ -134,15 +159,21 @@ const Add = () => {
             className="form-check-input"
             id="exampleCheck1"
           />
-          <label className="form-check-label" htmlFor="exampleCheck1">
+          <label
+            style={{ color: "white" }}
+            className="form-check-label"
+            htmlFor="exampleCheck1"
+          >
             Check me out
           </label>
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn bg-white">
           Submit
         </button>
-        <button>
-          <Link to={"/View"}>View</Link>
+        <button className="btn bg-white mx-3">
+          <Link to={"/View"} className="text-dark">
+            View
+          </Link>
         </button>
       </form>
     </div>

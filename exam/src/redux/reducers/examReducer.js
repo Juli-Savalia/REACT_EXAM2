@@ -22,6 +22,11 @@ const examReducer = (state = initialState, action) => {
         ...state,
         userlist: state.userlist.filter((user) => user.id !== action.payload),
       };
+    case "MULTIPLE_DELETEREC":
+      return {
+        ...state,
+        userlist: action.payload,
+      };
     default:
       return state;
   }

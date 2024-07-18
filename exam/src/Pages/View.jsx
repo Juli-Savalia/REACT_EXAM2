@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ViewRecord } from "../redux/actions/examAction";
+import { MultipleDelete, ViewRecord } from "../redux/actions/examAction";
 import { Link, useNavigate } from "react-router-dom";
 import { DeleteRecord } from "../redux/actions/examAction";
 const View = () => {
@@ -25,6 +25,15 @@ const View = () => {
             <th scope="col">SALARY</th>
             <th scope="col">DESIGNATION</th>
             <th scope="col">ACTIONS</th>
+            <th>
+              {" "}
+              <button
+                className="btn bg-warning text-white"
+                onClick={() => dispatch(MultipleDelete())}
+              >
+                Multiple Delete
+              </button>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -46,6 +55,7 @@ const View = () => {
                   >
                     Delete
                   </button>
+
                   <button
                     className="btn bg-warning mx-2 text-white"
                     onClick={() => nav("/Edit", { state: i })}

@@ -5,6 +5,7 @@ import {
   getDocs,
   getFirestore,
   deleteDoc,
+  writeBatch,
 } from "firebase/firestore";
 import { app } from "../../firebaseconfig";
 
@@ -59,6 +60,7 @@ export const DeleteRecord = (del) => {
     try {
       const delData = doc(db, "examrec", del);
       await deleteDoc(delData);
+      alert("Records Deleted Successfully..");
       dispatch({
         type: "DELETE_RECORD",
         payload: del,
@@ -75,6 +77,8 @@ export const EditRecord = (e) => {
     try {
       const editData = doc(db, "examrec", e.id);
       await updateDoc(editData, e.data);
+      alert("Redirected TO Edit Page Successfully..");
+
       dispatch({
         type: "EDIT_RECORD",
         payload: e,
@@ -82,6 +86,34 @@ export const EditRecord = (e) => {
     } catch (err) {
       console.log(err);
       return false;
+    }
+  };
+};
+
+export const MultipleDelete = () => {
+  return async (dispatch) => {
+    try {
+      const batchs = writeBatch(db);
+      let muldel = await getDocs(collection(db, "examrec"));
+
+      muldel.docs.map((d) => {
+        batchs.delete(doc(db, "examrec", d.id));
+      });
+
+      await batchs.commit();
+      alert("Docs deleted successfully from database");
+      let updatedrec = await getDocs(collection(db, "examrec"));
+      let del = updatedrec.docs.map((val) => ({
+        id: val.id,
+        ...val.data(),
+      }));
+
+      dispatch({
+        type: "MULTIPLE_DELETEREC",
+        payload: del,
+      });
+    } catch (error) {
+      console.log(error);
     }
   };
 };
