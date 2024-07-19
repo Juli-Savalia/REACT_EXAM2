@@ -27,6 +27,15 @@ const examReducer = (state = initialState, action) => {
         ...state,
         userlist: action.payload,
       };
+
+    case "CHANGE_STATUS":
+        const statuschange = state.userlist.map(val =>
+          val.id === action.payload.id ? { ...val, status: action.payload.NewStatus } : val
+        );
+        return {
+          ...state,
+          userlist: statuschange,
+      }
     default:
       return state;
   }

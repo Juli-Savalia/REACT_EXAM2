@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { AddRecord } from "../redux/actions/examAction";
-import { Link } from "react-router-dom";
+import { AddRecord, EditRecord } from "../redux/actions/examAction";
+import { Link, useLocation } from "react-router-dom";
 import View from "./View";
 const Edit = () => {
   const [email, setEmail] = useState("");
@@ -12,12 +12,22 @@ const Edit = () => {
   const [designation, setDesignation] = useState("");
 
   const dispatch = useDispatch();
+  const location = useLocation()
+
+  useEffect(() => {
+    setCity(location?.state?.city)
+    setDesignation(location?.state?.designation)
+    setEmail(location?.state?.email)
+    setPassword(location?.state?.password)
+    setName(location?.state?.name)
+    setSalary(location?.state?.salary)
+  }, [location.state])
 
   const handleSubmit = (h) => {
     h.preventDefault();
 
     let obj = {
-      id: Date.now(),
+      id: location.state.id,
       email: email,
       password: password,
       name: name,
@@ -26,8 +36,8 @@ const Edit = () => {
       designation: designation,
     };
 
-    dispatch(AddRecord(obj));
-    alert("Record Added Successfully..");
+    dispatch(EditRecord(obj));
+    alert("Record Edited Successfully..");
     setEmail("");
     setCity("");
     setDesignation("");
@@ -36,7 +46,7 @@ const Edit = () => {
     setSalary("");
   };
 
-  
+
   return (
     <div className="py-5">
       <h1 className="text-center">EDIT</h1>
@@ -50,7 +60,7 @@ const Edit = () => {
             type="text"
             className="form-control"
             onChange={(e) => setName(e.target.value)}
-            name="name"
+            value={name || ""}
           />
         </div>
         {/* email */}
@@ -64,7 +74,7 @@ const Edit = () => {
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             onChange={(e) => setEmail(e.target.value)}
-            name="email"
+            value={email || ""}
           />
           <div id="emailHelp" className="form-text">
             We'll never share your email with anyone else.
@@ -80,7 +90,7 @@ const Edit = () => {
             className="form-control"
             id="exampleInputPassword1"
             onChange={(e) => setPassword(e.target.value)}
-            name="password"
+            value={password || ""}
           />
         </div>
         {/* city */}
@@ -91,7 +101,7 @@ const Edit = () => {
           <select
             className="w-100 p-2 form-control"
             onChange={(e) => setCity(e.target.value)}
-            name="city"
+            value={city || ""}
           >
             <option value="">Jamanagr</option>
             <option value="">Surat</option>
@@ -112,7 +122,7 @@ const Edit = () => {
             className="form-control"
             id=""
             onChange={(e) => setSalary(e.target.value)}
-            name="salary"
+            value={salary || ""}
           />
         </div>
         {/* designation */}
@@ -125,7 +135,7 @@ const Edit = () => {
             className="w-100 form-control"
             id=""
             onChange={(e) => setDesignation(e.target.value)}
-            name="designation"
+            value={designation}
           />
         </div>
         {/* checkbox */}

@@ -54,7 +54,7 @@ const Add = () => {
             type="text"
             className="form-control"
             onChange={(e) => setName(e.target.value)}
-            name="name"
+            value={name || ""}
           />
         </div>
         {/* email */}
@@ -72,7 +72,7 @@ const Add = () => {
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             onChange={(e) => setEmail(e.target.value)}
-            name="email"
+            value={email || ""}
           />
           <div id="emailHelp" className="form-text">
             We'll never share your email with anyone else.
@@ -92,7 +92,7 @@ const Add = () => {
             className="form-control"
             id="exampleInputPassword1"
             onChange={(e) => setPassword(e.target.value)}
-            name="password"
+            value={password || ""}
           />
         </div>
         {/* city */}
@@ -107,7 +107,7 @@ const Add = () => {
           <select
             className="w-100 p-2 form-control"
             onChange={(e) => setCity(e.target.value)}
-            name="city"
+            value={city || ""}
           >
             <option value="">Jamanagr</option>
             <option value="">Surat</option>
@@ -132,7 +132,7 @@ const Add = () => {
             className="form-control"
             id=""
             onChange={(e) => setSalary(e.target.value)}
-            name="salary"
+            value={salary || ""}
           />
         </div>
         {/* designation */}
@@ -149,7 +149,7 @@ const Add = () => {
             className="w-100 form-control"
             id=""
             onChange={(e) => setDesignation(e.target.value)}
-            name="designation"
+            value={designation || ""}
           />
         </div>
         {/* checkbox */}

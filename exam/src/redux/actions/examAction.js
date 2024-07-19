@@ -5,6 +5,7 @@ import {
   getDocs,
   getFirestore,
   deleteDoc,
+  updateDoc,
   writeBatch,
 } from "firebase/firestore";
 import { app } from "../../firebaseconfig";
@@ -76,7 +77,14 @@ export const EditRecord = (e) => {
   return async (dispatch) => {
     try {
       const editData = doc(db, "examrec", e.id);
-      await updateDoc(editData, e.data);
+      await updateDoc(editData,{
+        name : e.name,
+        email : e.email,
+        password : e.password,
+        salary : e.salary,
+        designation : e.designation,
+        city : e.city,
+      });
       alert("Redirected TO Edit Page Successfully..");
 
       dispatch({
@@ -86,6 +94,28 @@ export const EditRecord = (e) => {
     } catch (err) {
       console.log(err);
       return false;
+    }
+  };
+};
+
+export const ChangeStatus = (s, currentStatus) => {
+  return async (dispatch) => {
+    try {
+      const stat = doc(db, "examrec", s);
+
+      const NewStatus = currentStatus === 'active' ? 'inactive' : 'active';
+
+      await updateDoc(stat, {
+        stat: NewStatus,
+      });
+      alert("status changed successfully..")
+      dispatch({
+        type: "CHANGE_STATUS",
+        payload: (s, NewStatus) 
+      });
+    } catch (err) {
+      console.log(err);
+      return false
     }
   };
 };
@@ -101,7 +131,7 @@ export const MultipleDelete = () => {
       });
 
       await batchs.commit();
-      alert("Docs deleted successfully from database");
+      alert("Records are deleted successfully..");
       let updatedrec = await getDocs(collection(db, "examrec"));
       let del = updatedrec.docs.map((val) => ({
         id: val.id,
